@@ -5,10 +5,20 @@ pipeline {
 }
     agent any
     stages {
+        
         stage('Example') {
             steps {
                 echo 'Hello World'
             }
         }
+        
+          stage('build') {
+             steps {
+                script {
+                    dockerImage = docker.build dockerImageName
+                }
+            }
+        }
+        
     }
 }

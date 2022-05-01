@@ -4,14 +4,15 @@ pipeline {
     dockerImage = ""
 }
     agent any
-        
+  stages{
+    
         stage('build') {
             steps {
                 script {
                     dockerImage = docker.build dockerImageName
-                }
+                      }
+                  }
             }
-        }
         
         stage('push docker image') {
             environment {

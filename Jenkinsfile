@@ -4,13 +4,6 @@ pipeline {
     dockerImage = ""
 }
     agent any
-
-    stages {
-        stage('checkout') {
-            steps {
-                git 'https://github.com/G-win300/node_cicd'
-            }
-        }
         
         stage('build') {
             steps {

@@ -25,6 +25,7 @@ pipeline {
                 }
             }
         }
+     }
         
         stage('kubernetes deploy') {
             steps {

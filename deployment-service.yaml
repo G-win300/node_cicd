@@ -18,7 +18,7 @@ spec:
       - name: nodeapp
         image: gwin300/node-app
         ports:
-        - containerPort: 8080
+        - containerPort: 3000
 
 ---
 apiVersion: v1
@@ -32,5 +32,5 @@ spec:
   ports:
     - protocol: TCP
       port: 8887
-      targetPort: 8080
+      targetPort: 3000
       nodePort: 32000

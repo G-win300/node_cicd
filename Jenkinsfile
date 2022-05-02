@@ -20,7 +20,7 @@ pipeline {
                         }
             steps {
                 script {
-                    docker.withRegistry('https://hub.docker.com/repository/docker/gwin300/node-app', registryCredentials)
+                    docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials )
                     dockerImage.push("latest")
                 }
             }

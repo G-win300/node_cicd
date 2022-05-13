@@ -145,10 +145,10 @@ this is to enable jenkins create our deployment.
 
 type command `ls -la && cd .kube`  
 `cat config`  
-copied all the content of the config file to our jenkins under the **manage credentials** like so
+copied all the content of the config file to our jenkins under *manage credentials*  **kubeconfig** and pasted it inside **content** like so
 
 ![jenkins-configuration](images/picture3.png)
 
 ---
 
-**STEP 8:** run my pipeline.
+**STEP 8:** ran my pipeline.

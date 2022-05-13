@@ -74,7 +74,7 @@ spec:
       nodePort: 32000
 ```
 
-**note:** it should be noted that in this file, we used **nodePort** instead of loadBalancer because we are not using the cloud. 
+**note:** it should be noted that in this file, i used **nodePort** instead of loadBalancer because i am not running this application in the cloud. 
 
 ---
 **STEP 4:** Created my **Jenkinsfile**  
@@ -151,4 +151,5 @@ copied all the content of the config file to our jenkins under *manage credentia
 
 ---
 
-**STEP 8:** ran my pipeline.
+**STEP 8:** ran my pipeline.  
+got a successful kubernetes cluster with two replicas deployed to my environment

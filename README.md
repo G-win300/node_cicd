@@ -28,3 +28,49 @@ EXPOSE 3000
 CMD [ "node", "index.js" ]
 ```
 
+
+---
+STEP: still in our current directory, created a deployment-service.yaml file.  
+this file contains both our kubernetes deployment and service configuration.
+
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodeapp-deployment
+  labels:
+    app: nodeapp
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodeapp
+  template:
+    metadata:
+      labels:
+        app: nodeapp
+    spec:
+      containers:
+      - name: nodeapp
+        image: gwin300/node-app
+        ports:
+        - containerPort: 3000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodeapp-service
+spec:
+  selector:
+    app: nodeapp
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 8887
+      targetPort: 3000
+      nodePort: 32000
+```
+
+**note:** it should be noted that in this file, we used **nodePort** instead of loadBalancer because we are not using the cloud. 
+

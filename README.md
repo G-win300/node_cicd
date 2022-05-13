@@ -1,15 +1,17 @@
-## **CICD PIPELINE PROJECT TO DEPLOY TO KUBERNETES CLUSTER USING JENKINS**  
+## **CI-CD PIPELINE PROJECT
+
+### DEPLOYING APPLICATION TO KUBERNETES CLUSTER USING JENKINS**    
 ### jenkins integration using kubernetes
 
 ---
-STEP 1: Get your environment ready
-since we are using jenkins as our Continous integration agent, we need to install the necessary plugins it will require.
+**STEP 1:** Get my environment ready
+since i am using jenkins as my Continous integration agent, i needed to install the necessary plugins it will require.
 
-go to MANAGE JENKINS and install docker pipeline plugin
-since we will also be deploying to kubernetes later on, we also need to install kubernetes plugin.
-note: the latest kubernetes plugin you'll see is faulty, so we will need to install an earlier stable version. you can download it via this link
+Under *MANAGE JENKINS*, i installed **docker pipeline plugin**
+since i will also be deploying to kubernetes later on, i also installed **kubernetes continous deploy** plugin.
+note: the latest kubernetes continous deploy plugin you'll see is faulty, so i had to install an earlier stable version.
 
-STEP: pull our simple application that we need to run from this repo  
+**STEP 2:** pull our simple application that we need to deploy  
 create a file called **Dockerfile** and paste this code  
 ```
 FROM node:latest
@@ -30,7 +32,7 @@ CMD [ "node", "index.js" ]
 
 
 ---
-STEP: still in our current directory, created a deployment-service.yaml file.  
+**STEP 3:** still in our current directory, i created a deployment-service.yaml file.  
 this file contains both our kubernetes deployment and service configuration.
 
 ```
@@ -75,9 +77,9 @@ spec:
 **note:** it should be noted that in this file, we used **nodePort** instead of loadBalancer because we are not using the cloud. 
 
 ---
-STEP: Create our **Jenkinsfile**  
+**STEP 4:** Created my **Jenkinsfile**  
 this is the file that jenkins will search for first. this file tells jenkins everything it should do.  
-**note** this file should also be in the same directory as all the aformentioned files.
+**note** this file is located in the root directory of our project application... samething with all the aformentioned files.
 
 ```
 pipeline {
@@ -120,25 +122,25 @@ pipeline {
 }
 ```
 ---
-#### our Jenkinsfile has a three pipeline phase  
-1. build our image with our application inside
-2. push our application to our dockerhub repo
-3. using our kubernetes configurations, it will execute every configuration in our deployment-service.yaml file which includes  
-   * creating our deployment with 2 replicas
-   * creating a internal service running on port 8887 (you any port you like)
-   * creating an external nodePort service running on port 32000 (use any port you like)
+#### Jenkinsfile has a three pipeline phase  
+1. build an image with my application inside
+2. push the image to my dockerhub repo
+3. using my kubernetes configurations, it will execute every configuration in my deployment-service.yaml file which includes  
+   * creating a deployment with 2 replicas
+   * creating a internal service running on port 8887 
+   * creating an external nodePort service running on port 32000
 
 ---
-STEP: commit changes to file and push to github
+**STEP 5:** commit changes to file and push to github
 
-STEP: at our jenkins application, we created a pipeline project
+**STEP 6:** at my jenkins application, i created a pipeline project
 
-Under pipeline, input configuration like so
+Under pipeline, configurations was inputted like so
 ![jenkins-configuration](images/picture1.png)
 
 ![jenkins-configuration](images/picture2.png)
 
-STEP: we need to give jenkins our kubernetes configuration details.  
+**STEP 7:** i need to give jenkins our kubernetes configuration details.  
 this is to enable jenkins create our deployment.
 
 type command `ls -la && cd .kube`  
@@ -148,3 +150,5 @@ copied all the content of the config file to our jenkins under the **manage cred
 ![jenkins-configuration](images/picture3.png)
 
 ---
+
+**STEP 8:** run my pipeline.

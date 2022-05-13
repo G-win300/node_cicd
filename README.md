@@ -128,4 +128,23 @@ pipeline {
    * creating a internal service running on port 8887 (you any port you like)
    * creating an external nodePort service running on port 32000 (use any port you like)
 
-STEP: we push the 
+---
+STEP: commit changes to file and push to github
+
+STEP: at our jenkins application, we created a pipeline project
+
+Under pipeline, input configuration like so
+![jenkins-configuration](images/picture1.png)
+
+![jenkins-configuration](images/picture2.png)
+
+STEP: we need to give jenkins our kubernetes configuration details.  
+this is to enable jenkins create our deployment.
+
+type command `ls -la && cd .kube`  
+`cat config`  
+copied all the content of the config file to our jenkins under the **manage credentials** like so
+
+![jenkins-configuration](images/picture3.png)
+
+---

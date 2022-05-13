@@ -8,8 +8,8 @@
 since i am using jenkins as my Continous integration agent, i needed to install the necessary plugins it will require.
 
 Under *MANAGE JENKINS*, i installed **docker pipeline plugin**
-since i will also be deploying to kubernetes later on, i also installed **kubernetes continous deploy** plugin.
-note: the latest kubernetes continous deploy plugin you'll see is faulty, so i had to install an earlier stable version.
+since i will also be deploying to kubernetes later on, i also installed **kubernetes continous deploy** plugin.  
+**note:** the latest kubernetes continous deploy plugin you'll see is faulty, so i had to install an earlier stable version.
 
 **STEP 2:** pull our simple application that we need to deploy  
 create a file called **Dockerfile** and paste this code  

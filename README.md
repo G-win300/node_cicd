@@ -74,3 +74,58 @@ spec:
 
 **note:** it should be noted that in this file, we used **nodePort** instead of loadBalancer because we are not using the cloud. 
 
+---
+STEP: Create our **Jenkinsfile**  
+this is the file that jenkins will search for first. this file tells jenkins everything it should do.  
+**note** this file should also be in the same directory as all the aformentioned files.
+
+```
+pipeline {
+  environment {
+    dockerImageName = "gwin300/node-app"
+    dockerImage = ""
+}
+    agent any
+  stages{
+    
+        stage('build') {
+            steps {
+                script {
+                    dockerImage = docker.build dockerImageName
+                      }
+                  }
+            }
+        
+        stage('push docker image') {
+            environment {
+                registryCredentials = "docker"
+                        }
+            steps {
+                script {
+                  docker.withRegistry( 'https://registry.hub.docker.com', registryCredentials ) {
+                    dockerImage.push("latest")
+                }
+            }
+        }
+     }
+        
+        stage('kubernetes deploy') {
+            steps {
+                script {
+                    kubernetesDeploy(configs: "deployment-service.yaml", kubeconfigId: "kubernetes")
+                }
+            }
+    }
+}
+}
+```
+---
+#### our Jenkinsfile has a three pipeline phase  
+1. build our image with our application inside
+2. push our application to our dockerhub repo
+3. using our kubernetes configurations, it will execute every configuration in our deployment-service.yaml file which includes  
+   * creating our deployment with 2 replicas
+   * creating a internal service running on port 8887 (you any port you like)
+   * creating an external nodePort service running on port 32000 (use any port you like)
+
+STEP: we push the 
